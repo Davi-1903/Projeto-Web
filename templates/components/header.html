@@ -1,0 +1,22 @@
+<header>
+    <div class="logo"></div>
+    <nav>
+        <ul class="menu">
+            {% if current_user.is_authenticated %}
+                {% if current_user.tipo_usuario == 'admin' %}
+                    <li><a href="#">Sugestões</a></li>
+                    <li><a href="#">Perfil</a></li>
+                {% else %}
+                    <li><a href="#">Sugestões</a></li>
+                    <li><a href="#">Minhas sugestões</a></li>
+                    <li><a href="#">Perfil</a></li>
+                {% endif %}
+                <li><a href="{{ url_for('auth.logout') }}" onclick="return confirm('Você deseja sair do sistema?')">Logout</a></li>
+            {% else %}
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                <li><a href="{{ url_for('auth.register') }}">Cadastro</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
