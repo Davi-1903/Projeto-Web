@@ -40,8 +40,8 @@ def login():
                     return render_template('auth/login.html')
                 
                 login_user(user)
-                flash('Novo usuário registrado no sistema', category='sucess')
-                return redirect(url_for('index'))
+                flash('Novo usuário registrado no sistema', category='success')
+                return redirect(url_for('sugestoes.listar'))
             
             except:
                 session.rollback()
@@ -76,8 +76,8 @@ def register():
                 session.add(new_user)
                 session.commit()
                 login_user(new_user)
-                flash('Novo usuário registrado no sistema', category='sucess')
-                return redirect(url_for('index'))
+                flash('Novo usuário registrado no sistema', category='success')
+                return redirect(url_for('sugestoes.listar'))
             
             except:
                 session.rollback()

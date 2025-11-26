@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Sugestões{% endblock %}
+
+{% block content %}
+    <article>
+        <form action="{{ url_for('sugestoes.criar') }}" method="post">
+            <h2>Nova sugestão</h2>
+            <div class="input-label">
+                <label for="titulo">Título</label>
+                <input type="text" name="titulo" id="titulo" required>
+            </div>
+            <div class="input-label">
+                <label for="descricao">Descrição</label>
+                <textarea name="descricao" id="descricao"></textarea>
+            </div>
+            <button type="submit">Postar</button>
+        </form>
+        <ul>
+            {% for sugestao in sugestoes %}
+                <li>{{sugestao.titulo}}</li>
+            {% endfor %}
+        </ul>
+    </article>
+{% endblock %}
