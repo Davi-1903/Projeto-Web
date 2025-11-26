@@ -11,3 +11,9 @@ __pycache__/
 
 # Variáveis de ambiente
 .env
+
+# Base de dados
+app.db
+
+# Arquivos de configuração
+.vscode/*
