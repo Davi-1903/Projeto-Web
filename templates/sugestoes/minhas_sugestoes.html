@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Minhas Sugestões{% endblock %}
+
+{% block content %}
+    <section>
+        <h2>Minhas sugestões</h2>
+        <ul>
+            {% for sugestao in sugestoes %}
+                <li>{{sugestao.titulo}}</li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}

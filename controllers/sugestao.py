@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, render_template, request
+from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from models.sugestao import Sugestao
 from database import Session
@@ -35,4 +35,12 @@ def criar():
             session.rollback()
             flash('Ocorreu um erro interno', category='error')
 
-    return render_template('sugestoes/sugestoes.html', sugestoes=[])
+    return redirect(url_for('sugestoes.listar'))
+
+
+@sugestoes_bp.route('/minhas', methods=['POST', 'GET'])
+@login_required
+def minhas_sugestoes():
+    with Session() as session:
+        sugestoes = session.query(Sugestao).filter_by(usuario_id=current_user.id).all()
+    return render_template('sugestoes/minhas_sugestoes.html', sugestoes=sugestoes)
