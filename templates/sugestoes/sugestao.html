@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Sugestão{% endblock %}
+
+{% block content %}
+    <section>
+        <article>
+            <a href="{{ url_for('sugestoes.listar') }}"><button>Voltar para sugestões</button></a>
+            <h2>{{sugestao.titulo}}</h2>
+            <p>{{sugestao.descricao or 'Não há'}}</p>
+            <p>{{sugestao.descricao_implementacao}}</p>
+            <p>{{sugestao.criado_em}}</p>
+            <p>{{sugestao.atualizado_em}}</p>
+            <span>{{sugestao.status}}</span>
+        </article>
+    </section>
+{% endblock %}

@@ -44,3 +44,11 @@ def minhas_sugestoes():
     with Session() as session:
         sugestoes = session.query(Sugestao).filter_by(usuario_id=current_user.id).all()
     return render_template('sugestoes/minhas_sugestoes.html', sugestoes=sugestoes)
+
+
+@sugestoes_bp.route('/<int:sugestao_id>', methods=['GET', 'POST'])
+@login_required
+def detalhar(sugestao_id: int):
+    with Session() as session:
+        sugestao = session.get(Sugestao, sugestao_id)
+    return render_template('sugestoes/sugestao.html', sugestao=sugestao)
