@@ -22,7 +22,10 @@
             <h2>Sugestões da comunidade</h2>
             <ul>
                 {% for sugestao in sugestoes %}
-                    <li><a href="{{ url_for('sugestoes.detalhar', sugestao_id=sugestao.id) }}">{{sugestao.titulo}}</a></li>
+                    <li><a href="{{ url_for('sugestoes.detalhar', sugestao_id=sugestao.id) }}">
+                        <h2>{{sugestao.titulo}}</h2>
+                        <span>{{sugestao.descricao}}</span>
+                    </a></li>
                 {% endfor %}
             </ul>
         </article>
