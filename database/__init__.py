@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 
 
-DATABASE_URI = os.environ.get('DATABASE_URI', 'sqlite:///sugestoes.db')
+DATABASE_URI = os.environ.get('DATABASE_URI')
 if DATABASE_URI is None or DATABASE_URI == '':
     raise RuntimeError('DATABASE_URI não foi definida')
 
