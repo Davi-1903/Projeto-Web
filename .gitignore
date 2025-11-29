@@ -17,3 +17,5 @@ app.db
 
 # Arquivos de configuração
 .vscode/*
+
+sugestoes.db

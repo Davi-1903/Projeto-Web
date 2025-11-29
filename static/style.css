@@ -6,3 +6,7 @@
     padding: 0;
     border: 0;
 }
+
+.content {
+    border: 2px solid black;
+}

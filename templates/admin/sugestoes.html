@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}Gerenciar Sugestões - Admin{% endblock %}
+
+{% block content %}
+<main>
+    <h1>Painel Administrativo - Sugestões</h1>
+    <p>Gerencie todas as sugestões da comunidade escolar</p>
+    <br>
+    {% if sugestoes %}
+        {% for sugestao in sugestoes %}
+        <div class="content">
+            <header>
+                <h2>{{ sugestao.titulo }}</h2>
+                <span>
+                    {% if sugestao.status == 'pendente' %}Pendente
+                    {% elif sugestao.status == 'em_analise' %}Em Análise
+                    {% elif sugestao.status == 'aprovada' %}Aprovada
+                    {% elif sugestao.status == 'implementada' %}Implementada
+                    {% elif sugestao.status == 'recusada' %}Recusada
+                    {% endif %}
+                </span>
+            </header>
+            
+            <br>
+
+            <p>{{ sugestao.descricao }}</p>
+            
+            <div>
+                <p><strong>Autor:</strong> {{ sugestao.usuario.nome }} ({{ sugestao.usuario.tipo_usuario }})</p>
+                <p><strong>Criado em:</strong> {{ sugestao.criado_em.strftime('%d/%m/%Y às %H:%M') }}</p>
+            </div>
+            
+            {% if sugestao.descricao_implementacao %}
+            <div>
+                <strong>Implementação:</strong>
+                <p>{{ sugestao.descricao_implementacao }}</p>
+            </div>
+            {% endif %}
+            
+            {% if sugestao.respostas %}
+            <div>
+                <strong>Respostas anteriores:</strong>
+                {% for resposta in sugestao.respostas %}
+                <div>
+                    <p><strong>{{ resposta.admin.nome }}</strong> - {{ resposta.criado_em.strftime('%d/%m/%Y às %H:%M') }}</p>
+                    <p>{{ resposta.resposta }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            <br>
+            <section>
+                <h3>Gerenciar Sugestão</h3>
+                
+                <form method="POST" action="{{ url_for('admin.atualizar_status', sugestao_id=sugestao.id) }}">
+                    <fieldset>
+                        <legend>Alterar Status</legend>
+                        
+                        <label for="status-{{ sugestao.id }}">Status:</label>
+                        <select name="status" id="status-{{ sugestao.id }}" required>
+                            <option value="pendente" {% if sugestao.status == 'pendente' %}selected{% endif %}>Pendente</option>
+                            <option value="em_analise" {% if sugestao.status == 'em_analise' %}selected{% endif %}>Em Análise</option>
+                            <option value="aprovada" {% if sugestao.status == 'aprovada' %}selected{% endif %}>Aprovada</option>
+                            <option value="implementada" {% if sugestao.status == 'implementada' %}selected{% endif %}>Implementada</option>
+                            <option value="recusada" {% if sugestao.status == 'recusada' %}selected{% endif %}>Recusada</option>
+                        </select>
+                        
+                        <label for="descricao-{{ sugestao.id }}">Descrição da Implementação é obrigatório se status for "Implementada":</label>
+                        <input type="text" name="descricao_implementacao" id="descricao-{{ sugestao.id }}" placeholder="Como foi implementada?">
+                        
+                        <button type="submit">Atualizar Status</button>
+                    </fieldset>
+                </form>
+                
+                <form method="POST" action="{{ url_for('admin.adicionar_resposta', sugestao_id=sugestao.id) }}">
+                    <fieldset>
+                        <legend>Adicionar Resposta</legend>
+                        
+                        <label for="resposta-{{ sugestao.id }}">Resposta:</label>
+                        <textarea name="resposta" id="resposta-{{ sugestao.id }}" rows="4" placeholder="Escreva sua resposta..." required></textarea>
+                        
+                        <button type="submit">Enviar Resposta</button>
+                    </fieldset>
+                </form>
+            </section>
+        </div>
+        <hr>
+        {% endfor %}
+    {% else %}
+        <p>Nenhuma sugestão encontrada.</p>
+    {% endif %}
+</main>
+{% endblock %}

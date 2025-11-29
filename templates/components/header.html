@@ -7,6 +7,9 @@
                 {% if current_user.tipo_usuario != 'admin' %}
                     <li><a href="{{ url_for('sugestoes.minhas_sugestoes') }}">Minhas sugestões</a></li>
                 {% endif %}
+                {% if current_user.tipo_usuario == 'admin' %}
+                    <li><a href="{{ url_for('admin.listar_sugestoes') }}">listar sugestoes</a></li>
+                {% endif %}
                 <li><a href="{{ url_for('user.ver_perfil') }}">Perfil</a></li>
                 <li><a href="{{ url_for('auth.logout') }}" onclick="return confirm('Você deseja sair do sistema?')">Logout</a></li>
             {% else %}
