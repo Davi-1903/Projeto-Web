@@ -14,7 +14,7 @@ class Usuario(Base, UserMixin):
     tipo_usuario = Column(Enum('aluno', 'funcionario', 'admin'), nullable=False)
     criado_em = Column(TIMESTAMP, server_default=func.current_timestamp())
 
-    sugestões = relationship('Sugestao', back_populates='usuario', cascade='all, delete')
+    sugestoes = relationship('Sugestao', back_populates='usuario', cascade='all, delete')
     respostas_admin = relationship('RespostaAdm', back_populates='admin')
     historico_status = relationship('HistoricoStatus', back_populates='admin')
 

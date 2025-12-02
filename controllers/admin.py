@@ -4,7 +4,6 @@ from models.sugestao import Sugestao
 from models.resposta_adm import RespostaAdm
 from models.historico_status import HistoricoStatus
 from database import Session
-from sqlalchemy.orm import joinedload
 from sqlalchemy.orm import selectinload
 
 

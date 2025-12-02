@@ -20,6 +20,6 @@ class Sugestao(Base):
     )
 
     # Relacionamentos
-    usuario = relationship('Usuario', back_populates='sugestões')
+    usuario = relationship('Usuario', back_populates='sugestoes')
     respostas = relationship('RespostaAdm', back_populates='sugestao', cascade='all, delete')
     historico = relationship('HistoricoStatus', back_populates='sugestao', cascade='all, delete')
