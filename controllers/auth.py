@@ -64,7 +64,7 @@ def register():
                 
                 tipo_usuario = classify_user(data['email'])
                 if tipo_usuario is None:
-                    flash(f'O email {data["email"]} é inválido', category='error')
+                    flash(f'O email {data["email"]} é inválido! Use @aluno, @funcionario ou @admin', category='error')
                     return render_template('auth/register.html')
                 
                 new_user = Usuario(
