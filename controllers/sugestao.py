@@ -52,3 +52,18 @@ def detalhar(sugestao_id: int):
     with Session() as session:
         sugestao = session.get(Sugestao, sugestao_id)
     return render_template('sugestoes/sugestao.html', sugestao=sugestao)
+
+
+@sugestoes_bp.route('/remover/<int:sugestao_id>', methods=['GET'])
+@login_required
+def remover(sugestao_id: int):
+    with Session() as session:
+        try:
+            sugestao = session.get(Sugestao, sugestao_id)
+            session.delete(sugestao)
+            session.commit()
+        except:
+            session.rollback()
+            flash('Ocorreu um erro interno', category='error')
+        return redirect(url_for('sugestoes.listar'))
+ 

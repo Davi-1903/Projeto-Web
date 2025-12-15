@@ -6,6 +6,7 @@
     <section>
         <article>
             <a href="{{ url_for('sugestoes.listar') }}"><button>Voltar para sugestões</button></a>
+            <a href="{{ url_for('sugestoes.remover', sugestao_id=sugestao.id) }}" onclick="return confirm('Você tem certeza?')"><button>Apagar</button></a>
             <h2>{{sugestao.titulo}}</h2>
             <p>{{sugestao.descricao or 'Não há'}}</p>
             <p>{{sugestao.descricao_implementacao}}</p>
